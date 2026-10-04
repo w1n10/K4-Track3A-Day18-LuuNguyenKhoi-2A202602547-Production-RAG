@@ -1,0 +1,171 @@
+{
+  "aggregate": {
+    "faithfulness": 0.9266666666666665,
+    "answer_relevancy": 0.8843457481506416,
+    "context_precision": 0.774999999925,
+    "context_recall": 0.925
+  },
+  "num_questions": 20,
+  "failures": [
+    {
+      "question": "Một nhân viên Senior có 9 năm thâm niên được nghỉ bao nhiêu ngày phép năm và lương trong khoảng nào?",
+      "answer": "Nhân viên có 9 năm thâm niên được hưởng 18 ngày phép năm (15 ngày tiêu chuẩn + 3 ngày thâm niên theo chính sách năm 2024, thay thế cho phiên bản 2023). Context không cung cấp thông tin về mức lương.",
+      "ground_truth": "Theo chính sách v2024: 15 ngày cơ bản + 3 ngày thâm niên (9÷3=3) = 18 ngày phép. Lương Senior (P3-P4): 20-35 triệu VNĐ/tháng.",
+      "avg_score": 0.375,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.5
+      },
+      "worst_metric": "answer_relevancy",
+      "score": 0.0,
+      "diagnosis": "Answer doesn't match question",
+      "suggested_fix": "Improve prompt template"
+    },
+    {
+      "question": "Nhân viên tạm ứng 15 triệu, sau 20 ngày mới thanh toán. Bị phạt bao nhiêu?",
+      "answer": "Số tiền phạt là 100.000 VNĐ.\n\nCách tính:\n- Số tiền quá hạn: 15.000.000 VNĐ.\n- Thời gian quá hạn: 5 ngày (20 ngày - 15 ngày quy định).\n- Phí phạt: 2%/tháng (tương đương 0,0667%/ngày).\n- Phép tính: 15.000.000 VNĐ x 2% x (5/30 ngày) = 50.000 VNĐ (tính theo tháng) hoặc 15.000.000 VNĐ x 2% = 300.000 VNĐ/tháng. Theo quy định phạt 2%/tháng trên số tiền chưa hoàn ứng, mức phạt là 300.000 VNĐ cho tháng đầu tiên quá hạn.",
+      "ground_truth": "Thời hạn thanh toán là 15 ngày. Quá hạn 5 ngày, bị tính phí 2%/tháng trên 15.000.000 VNĐ = 300.000 VNĐ/tháng (tính pro-rata khoảng 50.000 VNĐ cho 5 ngày).",
+      "avg_score": 0.6561,
+      "scores": {
+        "faithfulness": 0.2,
+        "answer_relevancy": 0.9246,
+        "context_precision": 1.0,
+        "context_recall": 0.5
+      },
+      "worst_metric": "faithfulness",
+      "score": 0.2,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature"
+    },
+    {
+      "question": "Thâm niên bao nhiêu năm thì được cộng thêm ngày phép?",
+      "answer": "Theo chính sách hiện hành (Phiên bản 2024), nhân viên có thâm niên từ 3 năm trở lên được cộng thêm ngày phép. Phiên bản 2023 (yêu cầu 5 năm) đã bị thay thế.",
+      "ground_truth": "Theo chính sách v2024 hiện hành, nhân viên có thâm niên từ 3 năm trở lên được cộng thêm 1 ngày phép cho mỗi 3 năm. Chính sách cũ v2023 yêu cầu 5 năm.",
+      "avg_score": 0.7221,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8883,
+        "context_precision": 0.0,
+        "context_recall": 1.0
+      },
+      "worst_metric": "context_precision",
+      "score": 0.0,
+      "diagnosis": "Too many irrelevant chunks",
+      "suggested_fix": "Add reranking or metadata filter"
+    },
+    {
+      "question": "Thông tin lương thuộc cấp độ phân loại dữ liệu nào?",
+      "answer": "Thông tin lương thuộc cấp độ 3: **Bí mật**.",
+      "ground_truth": "Theo quy chế chi trả lương, thông tin lương được phân loại là dữ liệu Bí mật, cấm chia sẻ với đồng nghiệp. Theo chính sách phân loại dữ liệu, dữ liệu Bí mật (cấp 3) phải mã hóa khi truyền và hạn chế truy cập theo need-to-know.",
+      "avg_score": 0.7251,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9004,
+        "context_precision": 0.0,
+        "context_recall": 1.0
+      },
+      "worst_metric": "context_precision",
+      "score": 0.0,
+      "diagnosis": "Too many irrelevant chunks",
+      "suggested_fix": "Add reranking or metadata filter"
+    },
+    {
+      "question": "Bao lâu phải đổi mật khẩu một lần?",
+      "answer": "Mật khẩu phải được thay đổi mỗi 120 ngày (theo phiên bản 2.0, đã thay thế phiên bản 1.0).",
+      "ground_truth": "Theo chính sách hiện hành (v2.0), mật khẩu phải được thay đổi mỗi 120 ngày. Chính sách cũ yêu cầu 90 ngày nhưng đã bị thay thế.",
+      "avg_score": 0.735,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9398,
+        "context_precision": 0.0,
+        "context_recall": 1.0
+      },
+      "worst_metric": "context_precision",
+      "score": 0.0,
+      "diagnosis": "Too many irrelevant chunks",
+      "suggested_fix": "Add reranking or metadata filter"
+    },
+    {
+      "question": "Nhân viên được tài trợ khóa học 25 triệu, nghỉ việc sau 8 tháng hoàn thành khóa học. Phải hoàn trả bao nhiêu?",
+      "answer": "Có. Nhân viên phải hoàn trả 25.000.000 VNĐ (100% chi phí).",
+      "ground_truth": "Nhân viên phải cam kết làm việc ít nhất 1 năm sau khi hoàn thành khóa học. Nghỉ sau 8 tháng là trước hạn cam kết, phải hoàn trả 100% chi phí tức 25.000.000 VNĐ.",
+      "avg_score": 0.8166,
+      "scores": {
+        "faithfulness": 0.3333,
+        "answer_relevancy": 0.9329,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "worst_metric": "faithfulness",
+      "score": 0.3333,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature"
+    },
+    {
+      "question": "Có cần kích hoạt xác thực đa yếu tố (MFA) không?",
+      "answer": "Có. Tất cả nhân viên bắt buộc kích hoạt MFA cho tài khoản email, VPN và các hệ thống nội bộ.",
+      "ground_truth": "Có, theo chính sách mật khẩu v2.0 hiện hành, tất cả nhân viên bắt buộc kích hoạt MFA cho email, VPN và hệ thống nội bộ. Chính sách cũ v1.0 không yêu cầu MFA.",
+      "avg_score": 0.832,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8279,
+        "context_precision": 1.0,
+        "context_recall": 0.5
+      },
+      "worst_metric": "context_recall",
+      "score": 0.5,
+      "diagnosis": "Missing relevant chunks",
+      "suggested_fix": "Improve chunking or add BM25"
+    },
+    {
+      "question": "Nhân viên được nghỉ bao nhiêu ngày phép năm?",
+      "answer": "Nhân viên được hưởng 15 ngày phép năm (theo Chính sách nghỉ phép năm phiên bản 2024, thay thế cho phiên bản 2023).",
+      "ground_truth": "Theo chính sách hiện hành (v2024), nhân viên được nghỉ 15 ngày phép năm có lương. Chính sách cũ (v2023) là 12 ngày nhưng đã bị thay thế.",
+      "avg_score": 0.8489,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8958,
+        "context_precision": 0.5,
+        "context_recall": 1.0
+      },
+      "worst_metric": "context_precision",
+      "score": 0.5,
+      "diagnosis": "Too many irrelevant chunks",
+      "suggested_fix": "Add reranking or metadata filter"
+    },
+    {
+      "question": "Muốn mua thiết bị trị giá 55 triệu cần ai phê duyệt?",
+      "answer": "Tổng Giám đốc (CEO) phê duyệt.",
+      "ground_truth": "Đơn hàng trên 50.000.000 VNĐ cần Tổng Giám đốc (CEO) phê duyệt.",
+      "avg_score": 0.9581,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8325,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "worst_metric": "answer_relevancy",
+      "score": 0.8325,
+      "diagnosis": "Answer doesn't match question",
+      "suggested_fix": "Improve prompt template"
+    },
+    {
+      "question": "Nếu cần mua một chiếc laptop 30 triệu cho nhân viên mới, ai phê duyệt và cần gì từ phòng CNTT?",
+      "answer": "Có. Đơn hàng 30.000.000 VNĐ cần Giám đốc phòng ban (Director) phê duyệt và cần có xác nhận của phòng CNTT về cấu hình kỹ thuật trước khi đề xuất.",
+      "ground_truth": "Laptop 30 triệu nằm trong khoảng 5-50 triệu nên cần Giám đốc phòng ban (Director) phê duyệt. Ngoài ra, mua sắm thiết bị CNTT cần có xác nhận cấu hình kỹ thuật từ phòng CNTT trước khi đề xuất. Cần đính kèm ít nhất 3 báo giá vì trên 10 triệu.",
+      "avg_score": 0.9642,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8567,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "worst_metric": "answer_relevancy",
+      "score": 0.8567,
+      "diagnosis": "Answer doesn't match question",
+      "suggested_fix": "Improve prompt template"
+    }
+  ]
+}
